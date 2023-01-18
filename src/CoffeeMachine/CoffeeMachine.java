@@ -1,3 +1,5 @@
+package CoffeeMachine;
+
 public class CoffeeMachine {
     private int currentAmountWatterMl;
     private final int MAX_AMOUNT_WATTER_ML = 1000;
@@ -51,7 +53,7 @@ public class CoffeeMachine {
 
     public String makeCoffee(double strongCoffee, int AmountCupMl) {
         if (strongCoffee < 0 || strongCoffee > 1) {
-            return "метод принимает параметры крепкость напитка (от 0 до 1)";
+            return "метод принимает параметры крепость напитка (от 0 до 1)";
         }
         if (AmountCupMl < 0) {
             return "используйте положительные значения для объема кружки";
@@ -64,7 +66,7 @@ public class CoffeeMachine {
         } else {
             currentAmountCoffeeGr -= coffeeConsumption;
             currentAmountWatterMl -= AmountCupMl;
-            return "Готовлю " + coffee.getNameCoffee() + " объемом " + AmountCupMl + " крепость " + strongCoffee;
+            return "Готовлю " + coffee.getFullNameCoffee() + " объемом " + AmountCupMl + " крепость " + strongCoffee;
         }
     }
 
