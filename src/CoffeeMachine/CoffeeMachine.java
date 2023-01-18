@@ -5,7 +5,7 @@ public class CoffeeMachine {
     private final int MAX_AMOUNT_WATTER_ML = 1000;
     private double currentAmountCoffeeGr;
     private final double MAX_AMOUNT_COFFEE_GR = 1000.0;
-    private final double COFFEE_CONSUMPTION_AT_MAX_STRONG_GR = 300.0;
+    private final double COFFEE_CONSUMPTION_AT_MAX_STRONG_GR = 25.0;
     private Coffee coffee;
 
 
