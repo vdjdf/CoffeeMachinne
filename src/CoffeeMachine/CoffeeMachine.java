@@ -35,38 +35,72 @@ public class CoffeeMachine {
             return true;
         }
     }
+    // СТАРЫЙ УБОГИЙ МЕТОД
 
+    //    public boolean addCoffee(double newCoffeeGr, Coffee coffee) {
+//
+//        if(newCoffeeGr< 0)
+//
+//    {
+//        System.out.println("метод только досыпает кофе, используйте положительные значения");
+//        return false;
+//        }
+//        if (currentAmountCoffeeGr == MAX_AMOUNT_COFFEE_GR) {
+//            System.out.println("невозможно засыпать кофе, контейнер заполнен");
+//            return false;
+//        } else if (newCoffeeGr + currentAmountCoffeeGr >= MAX_AMOUNT_COFFEE_GR) {
+//            this.coffee = coffee;
+//            currentAmountCoffeeGr = MAX_AMOUNT_COFFEE_GR;
+//            System.out.println("кофе засыпан до максимума , контейнер заполнен");
+//            return true;
+//        } else if (!(coffee.equals(this.coffee))) {
+//            currentAmountCoffeeGr = 0;
+//            if (newCoffeeGr + currentAmountCoffeeGr >= MAX_AMOUNT_COFFEE_GR) {
+//                this.coffee = coffee;
+//                currentAmountCoffeeGr = MAX_AMOUNT_COFFEE_GR;
+//                System.out.println("кофе засыпан до максимума , контейнер заполнен");
+//                return true;
+//            } else {
+//                this.coffee = coffee;
+//                currentAmountCoffeeGr += newCoffeeGr;
+//                return true;
+//            }
+//        } else {
+//            this.coffee = coffee;
+//            currentAmountCoffeeGr += newCoffeeGr;
+//            return true;
+//        }
+//    }
     public boolean addCoffee(double newCoffeeGr, Coffee coffee) {
-
         if (newCoffeeGr < 0) {
             System.out.println("метод только досыпает кофе, используйте положительные значения");
             return false;
         }
-        if (currentAmountCoffeeGr == MAX_AMOUNT_COFFEE_GR) {
+        if (!(coffee.equals(this.coffee))) {
+            this.coffee = coffee;
+            currentAmountCoffeeGr = 0;
+            return this.checkingForAddCoffee(newCoffeeGr);
+        } else {
+            this.coffee = coffee;
+            return this.checkingForAddCoffee(newCoffeeGr);
+        }
+
+    }
+
+    private boolean checkingForAddCoffee(double newCoffeeGr) {
+        if (MAX_AMOUNT_COFFEE_GR == currentAmountCoffeeGr) {
             System.out.println("невозможно засыпать кофе, контейнер заполнен");
             return false;
-        } else if (newCoffeeGr + currentAmountCoffeeGr >= MAX_AMOUNT_COFFEE_GR) {
-            this.coffee = coffee;
+        }
+        if (newCoffeeGr + currentAmountCoffeeGr >= MAX_AMOUNT_COFFEE_GR) {
             currentAmountCoffeeGr = MAX_AMOUNT_COFFEE_GR;
             System.out.println("кофе засыпан до максимума , контейнер заполнен");
             return true;
-        } else if (!(coffee.equals(this.coffee))) {
-            currentAmountCoffeeGr = 0;
-            if (newCoffeeGr + currentAmountCoffeeGr >= MAX_AMOUNT_COFFEE_GR) {
-                this.coffee = coffee;
-                currentAmountCoffeeGr = MAX_AMOUNT_COFFEE_GR;
-                System.out.println("кофе засыпан до максимума , контейнер заполнен");
-                return true;
-            } else {
-                this.coffee = coffee;
-                currentAmountCoffeeGr += newCoffeeGr;
-                return true;
-            }
         } else {
-            this.coffee = coffee;
             currentAmountCoffeeGr += newCoffeeGr;
             return true;
         }
+
     }
 
     public String makeCoffee(StrongCoffeeType strongCoffeeType, int AmountCupMl) {
