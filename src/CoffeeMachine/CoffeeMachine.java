@@ -79,11 +79,8 @@ public class CoffeeMachine {
         if (!(coffee.equals(this.coffee))) {
             this.coffee = coffee;
             currentAmountCoffeeGr = 0;
-            return this.checkingForAddCoffee(newCoffeeGr);
-        } else {
-            this.coffee = coffee;
-            return this.checkingForAddCoffee(newCoffeeGr);
         }
+        return this.checkingForAddCoffee(newCoffeeGr);
 
     }
 
