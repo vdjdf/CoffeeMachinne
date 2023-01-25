@@ -9,10 +9,6 @@ public class CoffeeContainer {
         return currentAmountCoffeeGr;
     }
 
-    public void setCurrentAmountCoffeeGr(double currentAmountCoffeeGr) {
-        this.currentAmountCoffeeGr = currentAmountCoffeeGr;
-    }
-
     public boolean addCoffee(double newCoffeeGr, Coffee coffee) {
         if (newCoffeeGr < 0) {
             System.out.println("метод только досыпает кофе, используйте положительные значения");
@@ -42,7 +38,7 @@ public class CoffeeContainer {
         }
     }
 
-    public void coffeeAfterCooking(double coffeeConsumption) {
+    public void removeCoffee(double coffeeConsumption) {
         currentAmountCoffeeGr -= coffeeConsumption;
     }
 
