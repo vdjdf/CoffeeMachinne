@@ -3,13 +3,10 @@ package CoffeeMachine;
 public class CoffeeMachine {
     private int currentAmountWatterMl;
     private static final int MAX_AMOUNT_WATTER_ML = 1000;
-    private double currentAmountBeansCoffeeGr;
-    private double currentAmountGroundCoffeeGr;
-    private static final double MAX_AMOUNT_BEANS_COFFEE_GR = 1000.0;
-    private static final double MAX_AMOUNT_GROUND_COFFEE_GR = 1000.0;
     private static final double COFFEE_CONSUMPTION_AT_MAX_STRONG_GR = 25.0;
     private final CoffeeContainer coffeeContainerBeans = new CoffeeContainer();
     private final CoffeeContainer coffeeContainerGround = new CoffeeContainer();
+    private static int amountAllCup;
 
 
     public String getCoffeeResidue(CoffeeType coffeeType) {
@@ -17,6 +14,10 @@ public class CoffeeMachine {
             return "Молотого кофе осталось " + coffeeContainerBeans.getCurrentAmountCoffeeGr() + "г";
         }
         return "Зернового кофе осталось " + coffeeContainerGround.getCurrentAmountCoffeeGr() + "г";
+    }
+
+    public static int getAmountAllCup() {
+        return amountAllCup;
     }
 
     public String getWaterResidue() {
@@ -57,29 +58,27 @@ public class CoffeeMachine {
         }
 
         if (coffeeType == CoffeeType.BEANS) {
-            if (coffeeContainerBeans.checkForMakeCoffee(coffeeConsumption)) {
-                return "Досыпьте кофе";
-            } else {
-                coffeeContainerBeans.coffeeAfterCooking(coffeeConsumption);
-                currentAmountWatterMl -= AmountCupMl;
-                return "Готовлю " + coffeeContainerBeans.getFullNameCoffee() + " объемом " + AmountCupMl + " крепость" +
-                        " " +
-                        strongCoffeeType.getStrongCoffee();
-            }
-        } else {
-            if (coffeeContainerGround.checkForMakeCoffee(coffeeConsumption)) {
-                return "Досыпьте кофе";
-            } else {
-                coffeeContainerGround.coffeeAfterCooking(coffeeConsumption);
-                currentAmountWatterMl -= AmountCupMl;
-                return "Готовлю " + coffeeContainerGround.getFullNameCoffee() + " объемом " + AmountCupMl + " " +
-                        "крепость " +
-                        strongCoffeeType.getStrongCoffee();
-            }
+            return forMakeCoffee(strongCoffeeType, coffeeConsumption, AmountCupMl, coffeeContainerBeans);
+        } else
+            return forMakeCoffee(strongCoffeeType, coffeeConsumption, AmountCupMl, coffeeContainerGround);
 
+    }
+
+    private String forMakeCoffee(StrongCoffeeType strongCoffeeType, double coffeeConsumption, int AmountCupMl,
+                                 CoffeeContainer coffeeContainer) {
+        if (coffeeContainer.checkForMakeCoffee(coffeeConsumption)) {
+            return "Досыпьте кофе";
+        } else {
+            coffeeContainer.removeCoffee(coffeeConsumption);
+            currentAmountWatterMl -= AmountCupMl;
+            amountAllCup++;
+            return "Готовлю " + coffeeContainer.getFullNameCoffee() +
+                    " объемом " + AmountCupMl + " " +
+                    "крепость " + strongCoffeeType.getStrongCoffee();
         }
     }
 
 }
+
 
 
