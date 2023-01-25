@@ -23,6 +23,12 @@ public class Coffee {
         return Objects.equals(nameCoffee, coffee.nameCoffee) && coffeeType == coffee.coffeeType;
     }
 
+    public CoffeeType getCoffeeType() {
+        return coffeeType;
+    }
+
+    public String getNameCoffee() {
+        return nameCoffee;
+    }
+
 }
-//        ВТОРОЙ ВАРИАНТ
-//        return nameCoffee.equals(coffee.nameCoffee) && coffeeType.getDescription().equals(coffee.coffeeType.getDescription());
