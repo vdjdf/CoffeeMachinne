@@ -7,6 +7,7 @@ public class CoffeeMachine {
     private final CoffeeContainer coffeeContainerBeans = new CoffeeContainer();
     private final CoffeeContainer coffeeContainerGround = new CoffeeContainer();
     private static int amountAllCup;
+    ScannerForMachine scanner = new ScannerForMachine(this);
 
 
     public String getCoffeeResidue(CoffeeType coffeeType) {
@@ -23,6 +24,7 @@ public class CoffeeMachine {
     public String getWaterResidue() {
         return "Воды осталось " + currentAmountWatterMl + "мл";
     }
+
 
     public boolean addWatter(int newWatterMl) {
         if (newWatterMl < 0) {
@@ -48,37 +50,42 @@ public class CoffeeMachine {
         } else return coffeeContainerGround.addCoffee(newCoffeeGr, coffee);
     }
 
-    public String makeCoffee(StrongCoffeeType strongCoffeeType, int AmountCupMl, CoffeeType coffeeType) {
+    public String makeCoffee(StrongCoffeeType strongCoffeeType, int amountCupMl, CoffeeType coffeeType) {
         double coffeeConsumption = strongCoffeeType.getStrongCoffee() * COFFEE_CONSUMPTION_AT_MAX_STRONG_GR;
-        if (AmountCupMl < 0) {
+        if (amountCupMl < 0) {
             return "используйте положительные значения для объема кружки";
         }
-        if (AmountCupMl > currentAmountWatterMl) {
+        if (amountCupMl > currentAmountWatterMl) {
             return "Долейте воды";
         }
 
         if (coffeeType == CoffeeType.BEANS) {
-            return forMakeCoffee(strongCoffeeType, coffeeConsumption, AmountCupMl, coffeeContainerBeans);
+            return forMakeCoffee(strongCoffeeType, coffeeConsumption, amountCupMl, coffeeContainerBeans);
         } else
-            return forMakeCoffee(strongCoffeeType, coffeeConsumption, AmountCupMl, coffeeContainerGround);
+            return forMakeCoffee(strongCoffeeType, coffeeConsumption, amountCupMl, coffeeContainerGround);
 
     }
 
-    private String forMakeCoffee(StrongCoffeeType strongCoffeeType, double coffeeConsumption, int AmountCupMl,
+    private String forMakeCoffee(StrongCoffeeType strongCoffeeType, double coffeeConsumption, int amountCupMl,
                                  CoffeeContainer coffeeContainer) {
         if (coffeeContainer.checkForMakeCoffee(coffeeConsumption)) {
             return "Досыпьте кофе";
         } else {
             coffeeContainer.removeCoffee(coffeeConsumption);
-            currentAmountWatterMl -= AmountCupMl;
+            currentAmountWatterMl -= amountCupMl;
             amountAllCup++;
             return "Готовлю " + coffeeContainer.getFullNameCoffee() +
-                    " объемом " + AmountCupMl + " " +
+                    " объемом " + amountCupMl + " " +
                     "крепость " + strongCoffeeType.getStrongCoffee();
         }
     }
 
+    public void scanner() {
+        scanner.scannerCoffee();
+    }
 }
+
+
 
 
 

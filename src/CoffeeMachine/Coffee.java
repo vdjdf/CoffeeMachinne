@@ -1,14 +1,19 @@
 package CoffeeMachine;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Coffee {
     private String nameCoffee;
     private CoffeeType coffeeType;
+    private static HashMap<Integer, Coffee> hashMapCoffee = new HashMap();
+    private static Integer numberCoffee = 0;
 
     public Coffee(String nameCoffee, CoffeeType coffeeType) {
         this.nameCoffee = nameCoffee;
         this.coffeeType = coffeeType;
+        numberCoffee++;
+        hashMapCoffee.put(numberCoffee, this);
     }
 
     public String getFullNameCoffee() {
@@ -31,4 +36,12 @@ public class Coffee {
         return nameCoffee;
     }
 
+    public static HashMap<Integer, Coffee> getHashMapCoffee() {
+        return (HashMap<Integer, Coffee>) hashMapCoffee;
+    }
+
+    @Override
+    public String toString() {
+        return getFullNameCoffee();
+    }
 }
