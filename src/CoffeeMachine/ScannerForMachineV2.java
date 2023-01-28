@@ -28,13 +28,13 @@ public class ScannerForMachineV2 {
         int requestFromConsole = scanner.nextInt();
         switch (requestFromConsole) {
             case (1):
-                programMakeCoffeePage1();
+                pageStrongCoffeeType();
                 break;
             case (2):
-                programAddWaterPage1();
+                pageAddWater();
                 break;
             case (3):
-                programAddCoffeePage1();
+                pageAddCoffee();
                 break;
             case (4):
                 System.out.println("Кофемашина переходит в спящий режим");
@@ -47,7 +47,7 @@ public class ScannerForMachineV2 {
         }
     }
 
-    private void programMakeCoffeePage1() {
+    private void pageStrongCoffeeType() {
         System.out.println("Выберете крепкость напитка:" +
                 "\n1. " + StrongCoffeeType.MILD.getStrongCoffee() +
                 "\n2. " + StrongCoffeeType.NORMAL.getStrongCoffee() +
@@ -56,15 +56,15 @@ public class ScannerForMachineV2 {
         switch (requestFromConsole) {
             case (1):
                 strongCoffeeType = StrongCoffeeType.MILD;
-                programMakeCoffeePage2();
+                pageAmountCup();
                 break;
             case (2):
                 strongCoffeeType = StrongCoffeeType.NORMAL;
-                programMakeCoffeePage2();
+                pageAmountCup();
                 break;
             case (3):
                 strongCoffeeType = StrongCoffeeType.STRONG;
-                programMakeCoffeePage2();
+                pageAmountCup();
                 break;
             default:
                 System.out.println("Некорректный ввод.");
@@ -73,14 +73,14 @@ public class ScannerForMachineV2 {
         }
     }
 
-    private void programMakeCoffeePage2() {
+    private void pageAmountCup() {
         System.out.println("Введите размер кружки:");
         int requestFromConsole = scanner.nextInt();
         amountCupMl = requestFromConsole;
-        programMakeCoffeePage3();
+        pageCoffeeType();
     }
 
-    private void programMakeCoffeePage3() {
+    private void pageCoffeeType() {
         System.out.println("Выберете тип кофе" +
                 "\n1. " + CoffeeType.BEANS +
                 "\n2. " + CoffeeType.GROUND);
@@ -88,11 +88,11 @@ public class ScannerForMachineV2 {
         switch (requestFromConsole) {
             case (1):
                 coffeeType = CoffeeType.BEANS;
-                programMakeCoffeePage4();
+                pageMakeCoffee();
                 break;
             case (2):
                 coffeeType = CoffeeType.GROUND;
-                programMakeCoffeePage4();
+                pageMakeCoffee();
                 break;
             default:
                 System.out.println("Некорректный ввод.");
@@ -101,12 +101,12 @@ public class ScannerForMachineV2 {
         }
     }
 
-    private void programMakeCoffeePage4() {
+    private void pageMakeCoffee() {
         System.out.println(coffeeMachine.makeCoffee(strongCoffeeType, amountCupMl, coffeeType));
         start();
     }
 
-    private void programAddWaterPage1() {
+    private void pageAddWater() {
         System.out.println("Сколько воды добавить?");
         int requestFromConsole = scanner.nextInt();
         if (coffeeMachine.addWatter(requestFromConsole)) {
@@ -115,15 +115,20 @@ public class ScannerForMachineV2 {
         start();
     }
 
-    private void programAddCoffeePage1() {
+    private void pageAddCoffee() {
         System.out.println("Какой кофе вы хотите добавить?");
         Coffee.getHashMapCoffee().forEach((k, v) -> System.out.println(k + ". " + v));
         int requestFromConsole = scanner.nextInt();
+        if (requestFromConsole > Coffee.getHashMapCoffee().size() || requestFromConsole <= 0) {
+            System.out.println("Некорректный ввод.");
+            start();
+           return;
+        }
         coffee = Coffee.getHashMapCoffee().get(requestFromConsole);
-        programAddCoffeePage2();
+        pageAddCoffeeGram();
     }
 
-    private void programAddCoffeePage2() {
+    private void pageAddCoffeeGram() {
         System.out.println("Сколько грамм кофе вы хотите добавить?");
         int requestFromConsole = scanner.nextInt();
         if (coffeeMachine.addCoffee(requestFromConsole, coffee)) {
