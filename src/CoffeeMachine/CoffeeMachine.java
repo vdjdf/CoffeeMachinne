@@ -7,7 +7,7 @@ public class CoffeeMachine {
     private final CoffeeContainer coffeeContainerBeans = new CoffeeContainer();
     private final CoffeeContainer coffeeContainerGround = new CoffeeContainer();
     private static int amountAllCup;
-    ScannerForMachine scanner = new ScannerForMachine(this);
+    ScannerForMachineV2 scanner = new  ScannerForMachineV2(this);
 
 
     public String getCoffeeResidue(CoffeeType coffeeType) {
@@ -81,7 +81,7 @@ public class CoffeeMachine {
     }
 
     public void scanner() {
-        scanner.scannerCoffee();
+        scanner.start();
     }
 }
 
