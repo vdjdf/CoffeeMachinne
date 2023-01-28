@@ -32,12 +32,9 @@ public class Coffee {
         return coffeeType;
     }
 
-    public String getNameCoffee() {
-        return nameCoffee;
-    }
 
     public static HashMap<Integer, Coffee> getHashMapCoffee() {
-        return (HashMap<Integer, Coffee>) hashMapCoffee;
+        return hashMapCoffee;
     }
 
     @Override
